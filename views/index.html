@@ -15,25 +15,39 @@
     <!--DataTables-->
     <link rel="stylesheet" href="//cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <!--DataTables-->
-    <script src="/js/index.js"></script>
-
+    <script type="text/javascript" src="/js/index.js"></script>
+    
   </head>
   <body>
-    <h1>ssadas</h1><br>
+    <h1>TITLE</h1>
+    <br>
+
+    <form class="row m-3" action="/newPerson" method="post">
+      <div class="col-md-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" name="name" id="name" required>
+      </div>
+      <div class="col-md-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" name="cpf" id="cpf" required>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
 
     <div class="container">
       <div>
-        <table id="tableCliente">
+        <table id="tablePerson">
           <thead>
             <tr>
-              <th>Nome</th>
+              <th>ID</th>
+              <th>Name</th>
               <th>CPF</th>
            </tr>
         </thead>
         </table>
       </div>
     </div>
-    
   </body>
 </html>

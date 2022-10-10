@@ -1,8 +1,25 @@
 // imports
-
 const express = require('express')
+const bodyParser = require('body-parser')
 const app = express()
+const mysql = require('mysql')
 const port = 3000
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+//Connection
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'user',
+  password: 'root',
+  database: 'bd_project'
+});
+
+connection.connect(function(err){
+  if(err) throw err;
+  console.log("connected");
+});
 
 //Arquivos estáticos
 app.use(express.static('public'))
@@ -16,17 +33,7 @@ app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
 
 // Servidor habilitado na porta 3000
-app.listen(port, () => console.info(`listening on port ${port}`))
+app.listen(port, () => console.info(`The magic happens on port ${port}`))
 
-
-// Páginas //
-
-//Página "index"
-app.get('', (req, res) => {
-  res.render('index', { text: 'This is EJS' })
-})
-
-//Página "About"
-app.get('/about', (req, res) => {
-  res.render('about', { text: 'About page' })
-})
+// Routes 
+require('./routes.js')(app, connection)
