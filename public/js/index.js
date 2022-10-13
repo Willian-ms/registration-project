@@ -1,6 +1,7 @@
+
 $(document).ready(function () {
     $.ajax({
-        method: 'post',
+        method: 'get',
         url: '/getPerson',
         datatype: 'json',
         success: function(response){
@@ -28,5 +29,25 @@ $(document).ready(function () {
             })
         }
     })
+
+    $('#tablePerson').on('click', 'tr', function () {
+        var data = $('#tablePerson').DataTable().row( this ).data()
+        $("#updateModal").find('#idmodal').val(data["id"])
+        $("#deleteModal").find('#idmodal').val(data["id"])
+        $("#updateModal").find('#modalname').val(data["nome"])
+        $("#updateModal").find('#modalcpf').val(data["cpf"])
+        $('#updateModal').modal("show");
+        console.log(data)
+    });
+
 })
 
+function deleteModal(){
+    $('#updateModal').modal('hide');
+    $('#deleteModal').modal('show')
+
+}
+function closeModal(){
+    $('#updateModal').modal('hide');
+    $('#deleteModal').modal('hide')
+}
