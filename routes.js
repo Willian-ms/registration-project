@@ -1,9 +1,12 @@
 module.exports = function(app,connection){
 
-  //Página "index"
+   /////////////////////////////
+  ///// Página "Index" /////
+  ////////////////////////////
   app.get('', (req, res) => {
     res.render('index', { text: 'This is EJS' })
   })
+  
 
   app.get("/getPerson",(req,res) =>{
     var select_query = "SELECT * FROM clientes ORDER BY id"
@@ -75,12 +78,97 @@ module.exports = function(app,connection){
       }
     });
   })
+   ////////////////////////
 
   
-  
-
-  //Página "About"
+   /////////////////////////////
+  ///// Página "About" /////
+  ////////////////////////////
   app.get('/about', (req, res) => {
     res.render('about', { text: 'About page' })
   })
+  
+  ////////////////////////
+
+
+  /////////////////////////////
+  ///// Página "Produtos" /////
+  ////////////////////////////
+
+  app.get('/produtos',(req,res) =>{
+    res.render('produtos',{text: 'Pág prod'})
+  })
+  
+  app.get("/getProduto",(req,res) =>{
+    var select_query = "SELECT * FROM produtos ORDER BY id"
+    console.log(select_query)
+    connection.query(select_query,(err,recordset) => {
+      if(err){
+        console.log(err)
+      }else{
+        res.send(recordset)
+      }
+    })  
+  })
+
+  app.post("/newProduto",(req, res) => {
+    let nome = req.body.nomeProduto
+    let grupo = req.body.grupoProduto
+    let peso = req.body.pesoProduto
+    let un = req.body.un
+
+    var select_query = "INSERT INTO produtos (nome, grupo, peso, unidade_medida) VALUES ('"+nome+"','"+grupo+"','"+peso+"','"+un+"')";
+    console.log(select_query);
+    connection.query(select_query,function(err, recordset){
+      if (err) {
+        console.log(err);
+      }else{
+        res.render('./produtos')
+      }
+    });
+  })
+
+  app.post('/updateProduto',(req,res) =>{
+    let id = req.body.idModal
+    let name = req.body.modalNome
+    let grupo = req.body.modalGrupo
+    let peso = req.body.modalPeso
+    let un = req.body.modalUn
+    console.log(name)
+
+    var select_query = "UPDATE produtos SET nome='"+name+"', grupo='"+grupo+"',unidade_medida='"+un+"',peso='"+peso+"'WHERE id='"+id+"'"
+    console.log(select_query);
+    connection.query(select_query,function(err, recordset){
+      if (err) {
+        console.log(err);
+      }else{
+        res.render('./produtos')
+      }
+    });
+  })
+
+  app.post("/deleteProduto",(req,res) =>{
+    let id = req.body.idModal
+
+    var select_query = "DELETE FROM produtos WHERE id='"+id+"'"
+    console.log(select_query);
+    connection.query(select_query,function(err, recordset){
+      if (err) {
+        console.log(err);
+      }else{
+        res.render('./produtos')
+      }
+    });
+  })
+
+   
+  ////////////////////////
+ 
+
+
+
+
+
+
 }
+

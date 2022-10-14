@@ -69,19 +69,25 @@ $(document).ready(function () {
       var x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);
       e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2];
       });  
-      
+
     document.getElementById('modalcep').addEventListener('input', function (e) {
       var x = e.target.value.replace(/\D/g, '').match(/(\d{0,5})(\d{0,3})/);
       e.target.value = !x[2] ? x[1] : x[1] + '-' + x[2];
       });  
 })
 
-function deleteModal(){
-    $('#updateModal').modal('hide');
+deleteModal = () => {
+    $('#updateModal').modal('hide')
     $('#deleteModal').modal('show')
-
 }
-function closeModal(){
-    $('#updateModal').modal('hide');
+
+createModal = () => {
+    $('#createModal').modal('show')
+}
+
+
+closeModal = () => {
+    $('#createModal').modal('hide')
+    $('#updateModal').modal('hide')
     $('#deleteModal').modal('hide')
 }

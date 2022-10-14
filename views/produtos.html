@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!--load jquery-->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <!--DataTables-->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+  <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  
+  
+  <!--Datables Buttons-->
+  <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+  
+
+  <!--BootStrap-->
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+  <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+  
+  
+  <script type="text/javascript" src="/js/produtos.js"></script>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <a class="active" href="/">Home</a>
+    <a href="/produtos">Produtos</a>
+    <a href="#contact">Pedidos</a>
+    <a href="#about">About</a>
+  </div>
+
+  <div class="content">
+    <h1>Cadastro de Produtos</h1>
+    <br>
+      <div class="col-ms-3">
+        <button type="button" class="btn btn-primary" onclick="createModal()">Criar</button>
+      </div>
+    <br>
+    <div class="container">
+      <div>
+        <table id="tableProduto" class="row-border hover order-column stripe compact">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Grupo</th>
+              <th>Peso</th>
+              <th>Un</th>
+            </tr>
+        </thead>
+        </table>
+      </div>
+    </div>
+
+
+    <!--Create Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createModalLabel">Modal title</h5>
+            <button type="button" class="close" aria-label="Close" onclick="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="row m-4" action="/newProduto" method="POST">
+              <div class="col-md-3">
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" class="form-control" name="nomeProduto" id="nomeProduto" required>
+              </div>
+              <div class="col-md-3">
+                <label for="grupo" class="form-label">Grupo:</label>
+                <input type="text" class="form-control" name="grupoProduto" id="grupoProduto" required>
+              </div>
+              <div class="col-md-4">
+                <label for="peso" class="form-label">Peso:</label>
+                <input type="text" class="form-control" name="pesoProduto" id="pesoProduto" required>
+              </div>
+              <div class="col-md-2">
+                <label for="un" class="form-label">UN:</label>
+                <input type="text" class="form-control" name="un" id="un" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Salvar</button>
+              <button type="button" class="btn btn-secondary" onclick="closeModal()">Fechar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!--Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"     aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateModalLabel">Modal title</h5>
+            <button type="button" class="close" onclick="closeModal()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="row m-4" action="/updateProduto" method="POST">
+              <div class="col-md-3">
+                <input type="text" name="idModal" id="idModal" hidden>
+                <label for="name" class="form-label">Nome:</label>
+                <input type="text" class="form-control" name="modalNome" id="modalNome" required>
+              </div>
+              <div class="col-md-3">
+                <label for="grupo" class="form-label">Grupo:</label>
+                <input type="text" class="form-control" name="modalGrupo" id="modalGrupo" required>
+              </div>
+              <div class="col-md-4">
+                <label for="peso" class="form-label">Peso:</label>
+                <input type="text" class="form-control" name="modalPeso" id="modalPeso" required>
+              </div>
+              <div class="col-md-2">
+                <label for="un" class="form-label">UN:</label>
+                <input type="text" class="form-control" name="modalUn" id="modalUn" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Salvar</button>
+              <button type="button" class="btn btn-secondary" onclick="closeModal()">Fechar</button>
+              <button type="button" class="btn btn-danger" onclick="deleteModal()" >Excluir</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!--Delete Modal-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"     aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="deleteModalLabel">Excluir Produto</h5>
+            <button type="button" class="close" onclick="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form class="row m-3" action="/deleteProduto" method="POST">
+              <div class="col-md-5" hidden>
+                <input type="text" name="idModal" id="idModal" hidden>
+              </div>
+              <div class="col-md-5">
+                <label class="form-label">Confirm?</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger">Excluir</button>
+              <button type="button" class="btn btn-secondary" onclick="closeModal()">Fechar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+</html>

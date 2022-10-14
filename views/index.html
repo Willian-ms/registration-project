@@ -33,51 +33,18 @@
     
     <div class="sidebar">
       <a class="active" href="/">Home</a>
-      <a href="#produtos">Produtos</a>
-      <a href="#contact">Contact</a>
+      <a href="/produtos">Produtos</a>
+      <a href="#contact">Pedidos</a>
       <a href="#about">About</a>
     </div>
+
   <div class="content">
     <h1>Cadastro de Clientes</h1>
     <br>
-    <form class="row m-3" action="/newPerson" method="post">
-      <div class="col-md-3">
-        <label for="name" class="form-label">Nome:</label>
-        <input type="text" class="form-control" name="name" id="name" required>
-      </div>
-      <div class="col-md-3">
-        <label for="cpf" class="form-label">CPF:</label>
-        <input type="text" class="form-control" name="cpf" id="cpf" required>
-      </div>
-      <div class="col-md-4">
-        <label for="email" class="form-label">E-mail:</label>
-        <input type="email" class="form-control" name="email" id="email" required>
-      </div>
-      <div class="col-md-2">
-        <label for="cep" class="form-label">CEP:</label>
-        <input type="text" class="form-control" name="cep" id="cep" required>
-      </div>
-      <div class="col-md-4">
-        <label for="address" class="form-label">Endereço:</label>
-        <input type="text" class="form-control" name="address" id="address" required>
-      </div>
-      <div class="col-md-1">
-        <label for="numberAddress" class="form-label">N°:</label>
-        <input type="text" class="form-control" name="numberAddress" id="numberAddress" required>
-      </div>
-      <div class="col-md-3">
-        <label for="city" class="form-label">Cidade:</label>
-        <input type="text" class="form-control" name="city" id="city" required>
-      </div>
-      <div class="col-md-3">
-        <label for="state" class="form-label">Estado:</label>
-        <input type="text" class="form-control" name="state" id="state" required>
-      </div>
-      <div class="col-ms-3">
-        <button type="submit" class="btn btn-primary">Confirmar</button>
-      </div>
-    </form>
-
+    <div class="col-ms-3">
+      <button type="button" class="btn btn-primary" onclick="createModal()">Criar</button>
+    </div>
+    <br>
     <div class="container">
       <div>
         <table id="tablePerson" class="row-border hover order-column stripe compact">
@@ -99,12 +66,66 @@
     </div>
   </div>
 
+  <!--Create Modal -->
+  <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="createModalLabel">Cadastrar Cliente</h5>
+          <button type="button" class="close" onclick="closeModal()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form class="row m-4" action="/newPerson" method="post">
+            <div class="col-md-5">
+              <label for="name" class="form-label">Nome:</label>
+              <input type="text" class="form-control" name="name" id="name" required>
+            </div>
+            <div class="col-md-5">
+              <label for="cpf" class="form-label">CPF:</label>
+              <input type="text" class="form-control" name="cpf" id="cpf" required>
+            </div>
+            <div class="col-md-6">
+              <label for="email" class="form-label">E-mail:</label>
+              <input type="email" class="form-control" name="email" id="email" required>
+            </div>
+            <div class="col-md-4">
+              <label for="cep" class="form-label">CEP:</label>
+              <input type="text" class="form-control" name="cep" id="cep" required>
+            </div>
+            <div class="col-md-6">
+              <label for="address" class="form-label">Endereço:</label>
+              <input type="text" class="form-control" name="address" id="address" required>
+            </div>
+            <div class="col-md-4">
+              <label for="numberAddress" class="form-label">N°:</label>
+              <input type="text" class="form-control" name="numberAddress" id="numberAddress" required>
+            </div>
+            <div class="col-md-6">
+              <label for="city" class="form-label">Cidade:</label>
+              <input type="text" class="form-control" name="city" id="city" required>
+            </div>
+            <div class="col-md-6">
+              <label for="state" class="form-label">Estado:</label>
+              <input type="text" class="form-control" name="state" id="state" required>
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Confirmar</button>
+              <button type="button" class="btn btn-secondary" onclick="closeModal()">Fechar</button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+
     <!--Update Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel"     aria-hidden="true">
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="updateModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="updateModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="updateModalLabel">Alterar Cliente</h5>
             <button type="button" class="close" onclick="closeModal()" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -160,7 +181,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="deleteModalLabel">Excluir Cliente</h5>
             <button type="button" class="close" onclick="closeModal()">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -182,7 +203,5 @@
         </div>
       </div>
     </div>
-
-    
   </body>
 </html>
