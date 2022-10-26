@@ -6,7 +6,7 @@ module.exports = function(app,connection){
   app.get('', (req, res) => {
     res.render('index', { text: 'This is EJS' })
   })
-  
+
 
   app.get("/getPerson",(req,res) =>{
     var select_query = "SELECT * FROM clientes ORDER BY id"
@@ -78,17 +78,15 @@ module.exports = function(app,connection){
       }
     });
   })
-   ////////////////////////
 
   
    /////////////////////////////
-  ///// Página "About" /////
+  ///// Página "Cadastros" /////
   ////////////////////////////
-  app.get('/about', (req, res) => {
-    res.render('about', { text: 'About page' })
+  app.get('/cadastros', (req, res) => {
+    res.render('cadastros', { text: 'About page' })
   })
   
-  ////////////////////////
 
 
   /////////////////////////////
@@ -162,7 +160,13 @@ module.exports = function(app,connection){
   })
 
    
-  ////////////////////////
+  /////////////////////////////
+  ///// Página "Pedidos" /////
+  ////////////////////////////
+
+  app.get('/pedidos',(req,res) =>{
+    res.render('pedidos',{text: 'Pág pedidos'})
+  })
  
 
 
